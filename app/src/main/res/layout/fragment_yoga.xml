@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_yoga_scene">
+
+    <ImageButton
+        android:id="@+id/icBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        android:contentDescription="Back Btn"
+        android:paddingVertical="20dp"
+        android:paddingEnd="20dp"
+        android:src="@drawable/ic_back_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/headingSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginStart="-14dp"
+        android:layout_marginTop="-6dp"
+        android:alpha="0"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Find your favourite pose"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/icBack"
+        app:layout_constraintStart_toEndOf="@id/icBack"
+        app:layout_constraintTop_toTopOf="@id/icBack" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/subHeading1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Find your"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="@+id/icBack"
+        app:layout_constraintTop_toBottomOf="@+id/icBack" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/subHeading2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Favourite Pose"
+        android:textColor="#C0C0C0"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="@+id/subHeading1"
+        app:layout_constraintTop_toBottomOf="@+id/subHeading1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/yogaRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layoutAnimation="@anim/layout_animation"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/subHeading2" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

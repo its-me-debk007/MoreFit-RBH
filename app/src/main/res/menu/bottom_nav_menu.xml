@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/gymFragment"
+        android:icon="@drawable/gym"
+        android:title="@string/gym" />
+    <item
+        android:id="@+id/yogaFragment"
+        android:icon="@drawable/yoga"
+        android:title="@string/yoga" />
+    <item
+        android:id="@+id/dietFragment"
+        android:icon="@drawable/diet"
+        android:title="@string/diet" />
+    <item
+        android:id="@+id/workoutPlannerFragment"
+        android:icon="@drawable/workout_planner"
+        android:title="@string/workout_planner" />
+
+<!--    <item-->
+<!--        android:id="@+id/communityForumFragment"-->
+<!--        android:icon="@drawable/ic_community_forum"-->
+<!--        android:title="@string/forum" />-->
+
+
+</menu>

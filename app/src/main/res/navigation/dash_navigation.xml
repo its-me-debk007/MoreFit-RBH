@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dash_navigation"
+    app:startDestination="@id/gymFragment">
+
+    <fragment
+        android:id="@+id/gymFragment"
+        android:name="com.example.morefit.ui.fragment.dash.gym.GymFragment"
+        android:label="fragment_gym"
+        tools:layout="@layout/fragment_gym" >
+        <action
+            android:id="@+id/action_gymFragment_to_exerciseFragment2"
+            app:destination="@id/exerciseFragment2" />
+        <action
+            android:id="@+id/action_gymFragment_to_yogaFragment"
+            app:destination="@id/yogaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/yogaFragment"
+        android:name="com.example.morefit.ui.fragment.dash.yoga.YogaFragment"
+        android:label="fragment_yoga"
+        tools:layout="@layout/fragment_yoga" >
+        <action
+            android:id="@+id/action_yogaFragment_to_yogaPoseDetailsFragment"
+            app:destination="@id/yogaPoseDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dietFragment"
+        android:name="com.example.morefit.ui.fragment.dash.diet.DietFragment"
+        android:label="fragment_diet"
+        tools:layout="@layout/fragment_diet" >
+        <action
+            android:id="@+id/action_dietFragment_to_dietPlan"
+            app:destination="@id/dietPlan" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseFragment2"
+        android:name="com.example.morefit.ui.fragment.dash.gym.ExerciseFragment"
+        android:label="fragment_exercise"
+        tools:layout="@layout/fragment_exercise" >
+        <action
+            android:id="@+id/action_exerciseFragment2_to_exerciseDetailFragment"
+            app:destination="@id/exerciseDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dietPlan"
+        android:name="com.example.morefit.ui.fragment.dash.diet.DietPlan"
+        android:label="DietPlan"
+        tools:layout="@layout/fragment_diet_plan"/>
+    <fragment
+        android:id="@+id/yogaPoseDetailsFragment"
+        android:name="com.example.morefit.ui.fragment.dash.yoga.YogaPoseDetailsFragment"
+        android:label="YogaPoseDetailsFragment" >
+        <argument
+            android:name="yogaPose"
+            app:argType="com.example.morefit.model.Pose" />
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/communityForumFragment"-->
+<!--        android:name="com.example.morefit.ui.fragment.dash.communityForum.CommunityForumFragment"-->
+<!--        android:label="CommunityForumFragment" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_communityForumFragment_to_createPostFragment"-->
+<!--            app:destination="@id/createPostFragment" />-->
+<!--    </fragment>-->
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.example.morefit.ui.fragment.dash.communityForum.CreatePostFragment"
+        android:label="CreatePostFragment" />
+    <fragment
+        android:id="@+id/exerciseDetailFragment"
+        android:name="com.example.morefit.ui.fragment.dash.gym.ExerciseDetailFragment"
+        android:label="ExerciseDetailFragment"
+        tools:layout="@layout/fragment_yoga_pose_details">
+        <argument
+            android:name="data"
+            app:argType="com.example.morefit.model.Data" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutPlannerFragment"
+        android:name="com.example.morefit.ui.fragment.dash.workout_planner.WorkoutPlannerFragment"
+        android:label="fragment_workout_planner"
+        tools:layout="@layout/fragment_workout_planner" >
+        <action
+            android:id="@+id/action_workoutPlannerFragment_to_exerciseDetailFragment"
+            app:destination="@id/exerciseDetailFragment" />
+    </fragment>
+</navigation>
