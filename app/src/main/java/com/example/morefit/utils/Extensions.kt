@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.View
 import com.example.morefit.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.Date
+import java.util.*
 
 fun Activity.hideBottomNavigationView() {
     this.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE

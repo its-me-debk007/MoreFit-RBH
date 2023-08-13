@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.example.morefit.databinding.ActivityVideoCallBinding
 import io.agora.rtc2.ChannelMediaOptions
 import io.agora.rtc2.Constants
@@ -16,6 +17,8 @@ import io.agora.rtc2.IRtcEngineEventHandler
 import io.agora.rtc2.RtcEngine
 import io.agora.rtc2.RtcEngineConfig
 import io.agora.rtc2.video.VideoCanvas
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class VideoCallActivity : AppCompatActivity() {
@@ -23,7 +26,8 @@ class VideoCallActivity : AppCompatActivity() {
 
     private val appId = "c33858c359d240c988b0057a0b1d6b1f"
     private val channelName = "CHANNEL_NAME"
-    private val token = "007eJxTYChgY/k1+Z6UVO+C1RerPrxafUV0isiTjZ+eH7zTWyOacidagSHZ1MLA0iDR1DgtzdzEwtjUwtAs0dLU2CTF3CDZzCjJfEf99ZSGQEYGo47ZTIwMEAji8zA4ezj6+bn6xPs5+royMAAAB7ojWg=="
+    private val token =
+        "007eJxTYChgY/k1+Z6UVO+C1RerPrxafUV0isiTjZ+eH7zTWyOacidagSHZ1MLA0iDR1DgtzdzEwtjUwtAs0dLU2CTF3CDZzCjJfEf99ZSGQEYGo47ZTIwMEAji8zA4ezj6+bn6xPs5+royMAAAB7ojWg=="
     private val uid = 0
     private var isJoined = false
     private var agoraEngine: RtcEngine? = null
@@ -43,10 +47,12 @@ class VideoCallActivity : AppCompatActivity() {
         )
         requestMultiplePermissions.launch(permissionsToRequest)
 
-        countDownTimer = object : CountDownTimer(30*60*1000, 1000) {
+        countDownTimer = object : CountDownTimer(30 * 60 * 1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                val minute = millisUntilFinished/(60*1000)
-                val second = (millisUntilFinished%(60*1000) - millisUntilFinished/(60*1000)).toString().substring(0, 2)
+                val minute = millisUntilFinished / (60 * 1000)
+                val second =
+                    abs((millisUntilFinished % (60 * 1000) - millisUntilFinished / (60 * 1000))).toString()
+                        .substring(0, 2)
                 binding.timer.text = "$minute:$second Left"
             }
 
@@ -91,7 +97,10 @@ class VideoCallActivity : AppCompatActivity() {
             Log.d("video_call", "Remote user joined $uid")
 
             // Set the remote video view
-            runOnUiThread { setupRemoteVideo(uid) }
+//            runOnUiThread {
+            lifecycleScope.launch(Dispatchers.Main) {
+                setupRemoteVideo(uid)
+            }
         }
 
         override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
@@ -101,7 +110,10 @@ class VideoCallActivity : AppCompatActivity() {
 
         override fun onUserOffline(uid: Int, reason: Int) {
             Log.d("video_call", "Remote user offline $uid $reason")
-            runOnUiThread { remoteSurfaceView!!.visibility = View.GONE }
+//            runOnUiThread {
+            lifecycleScope.launch(Dispatchers.Main) {
+                remoteSurfaceView!!.isVisible = false
+            }
         }
     }
 
@@ -129,7 +141,7 @@ class VideoCallActivity : AppCompatActivity() {
         agoraEngine!!.setupLocalVideo(
             VideoCanvas(
                 localSurfaceView,
-                VideoCanvas.RENDER_MODE_HIDDEN,
+                VideoCanvas.RENDER_MODE_ADAPTIVE,
                 0
             )
         )
@@ -144,7 +156,7 @@ class VideoCallActivity : AppCompatActivity() {
         options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
         // Display LocalSurfaceView.
         setupLocalVideo()
-        localSurfaceView!!.visibility = View.VISIBLE
+        localSurfaceView!!.isVisible = true
         // Start local preview.
         agoraEngine!!.startPreview()
         // Join the channel with a temp token.
